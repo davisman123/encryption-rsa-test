@@ -1,0 +1,563 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.4' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     20201,        555]
+NotebookOptionsPosition[     17574,        458]
+NotebookOutlinePosition[     17921,        473]
+CellTagsIndexPosition[     17878,        470]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["RSA Public Key Practice", "Title",
+ CellChangeTimes->{{3.674428333161545*^9, 3.6744283442230034`*^9}}],
+
+Cell["Authors: David Silverman, Bill Molchan", "Item",
+ CellChangeTimes->{{3.6744400174642324`*^9, 3.674440029263013*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["Generating the Private and Public Key Pairs", "Section",
+ CellChangeTimes->{{3.674439969669695*^9, 3.6744399872167263`*^9}}],
+
+Cell[TextData[StyleBox["First we must generate primes p, and q, and n which \
+is p * q",
+ FontSlant->"Italic",
+ FontColor->RGBColor[0.5, 0, 0.5]]], "ItemParagraph",
+ CellChangeTimes->{{3.674440137181691*^9, 3.6744401392767315`*^9}, {
+  3.674440222967288*^9, 3.6744402617502165`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{"p", " ", "=", " ", 
+  RowBox[{"Prime", "@", 
+   RowBox[{"RandomInteger", "@", 
+    RowBox[{"{", 
+     RowBox[{"200000", ",", "300000"}], "}"}]}]}]}], "\[IndentingNewLine]", 
+ RowBox[{"q", " ", "=", " ", 
+  RowBox[{"Prime", "@", 
+   RowBox[{"RandomInteger", "@", 
+    RowBox[{"{", 
+     RowBox[{"200000", ",", "300000"}], "}"}]}]}]}], "\n", 
+ RowBox[{"n", " ", "=", " ", 
+  RowBox[{"p", "*", "q"}]}]}], "Input",
+ CellChangeTimes->{{3.6744319402410836`*^9, 3.674432026990075*^9}, {
+   3.6744320638069754`*^9, 3.6744321506964545`*^9}, {3.674432201038295*^9, 
+   3.674432215958451*^9}, {3.674432730889284*^9, 3.6744327679170055`*^9}, {
+   3.6744328626792593`*^9, 3.674432905842927*^9}, {3.674433431108738*^9, 
+   3.67443343324296*^9}, {3.6744351441678133`*^9, 3.6744351533347397`*^9}, {
+   3.674436229892362*^9, 3.6744362391390715`*^9}, {3.6744371313151875`*^9, 
+   3.6744371347727566`*^9}, {3.6744373860614443`*^9, 3.674437389453848*^9}, {
+   3.67443754051232*^9, 3.674437545302909*^9}, {3.674437609236511*^9, 
+   3.6744376125939255`*^9}, 3.6744400496619806`*^9, 3.674440099621014*^9}],
+
+Cell[BoxData["4008013"], "Output",
+ CellChangeTimes->{3.6744408255269585`*^9}],
+
+Cell[BoxData["3713147"], "Output",
+ CellChangeTimes->{3.6744408255299654`*^9}],
+
+Cell[BoxData["14882341446911"], "Output",
+ CellChangeTimes->{3.674440825532467*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[StyleBox["Next we define the functions cpr, generateR, and \
+generateS",
+ FontSlant->"Italic"]], "ItemParagraph",
+ CellChangeTimes->{{3.674440137181691*^9, 3.6744401392767315`*^9}, {
+  3.674440222967288*^9, 3.674440253264474*^9}, {3.6744402848104486`*^9, 
+  3.6744403001298513`*^9}},
+ FontColor->RGBColor[0.5, 0, 0.5]],
+
+Cell[TextData[StyleBox["cpr: generates a coprime number x between the range k \
+and m, noting that x > m > k > 1",
+ FontSlant->"Italic"]], "SubitemParagraph",
+ CellChangeTimes->{{3.674440137181691*^9, 3.6744401392767315`*^9}, {
+  3.674440222967288*^9, 3.674440253264474*^9}, {3.6744402848104486`*^9, 
+  3.6744403590867815`*^9}, {3.674440788267916*^9, 3.6744408024123335`*^9}},
+ FontColor->RGBColor[0.5, 0, 0.5]],
+
+Cell[TextData[StyleBox["      generateR: generates r using the coprime \
+generator (cpr)",
+ FontSlant->"Italic"]], "ItemParagraph",
+ CellChangeTimes->{{3.674440137181691*^9, 3.6744401392767315`*^9}, {
+  3.674440222967288*^9, 3.674440253264474*^9}, {3.6744402848104486`*^9, 
+  3.6744403861784782`*^9}, {3.67444045840287*^9, 3.674440473004719*^9}},
+ FontColor->RGBColor[0.5, 0, 0.5]],
+
+Cell[TextData[StyleBox["      generateS: generates s using PowerMod to take \
+the multiplicative inverse of r mod EulerPhi[ p * q ]",
+ FontSlant->"Italic"]], "ItemParagraph",
+ CellChangeTimes->{{3.674440137181691*^9, 3.6744401392767315`*^9}, {
+  3.674440222967288*^9, 3.674440253264474*^9}, {3.6744402848104486`*^9, 
+  3.6744403861784782`*^9}, {3.67444045840287*^9, 3.6744405411153145`*^9}},
+ FontColor->RGBColor[0.5, 0, 0.5]]
+}, Open  ]],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"cpr", "[", 
+    RowBox[{"x_Integer", ",", "k_Integer", ",", "m_Integer"}], "]"}], "/;", 
+   RowBox[{"x", ">", "m", ">", "k", ">", "1"}]}], ":=", 
+  RowBox[{"RandomChoice", "@", 
+   RowBox[{"Pick", "[", 
+    RowBox[{
+     RowBox[{"Range", "[", 
+      RowBox[{"k", ",", "m"}], "]"}], ",", 
+     RowBox[{"CoprimeQ", "[", 
+      RowBox[{"x", ",", 
+       RowBox[{"Range", "[", 
+        RowBox[{"k", ",", "m"}], "]"}]}], "]"}]}], "]"}]}]}], "\n", 
+ RowBox[{
+  RowBox[{"generateR", "[", 
+   RowBox[{"p_", ",", "q_"}], "]"}], ":=", 
+  RowBox[{"cpr", "[", 
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{"p", "-", "1"}], ")"}], "*", 
+      RowBox[{"(", 
+       RowBox[{"q", "-", "1"}], ")"}]}], ")"}], ",", "2", ",", 
+    RowBox[{"q", "-", "1"}]}], "]"}]}], "\n", 
+ RowBox[{
+  RowBox[{"generateS", "[", 
+   RowBox[{"r_", ",", "p_", ",", "q_"}], "]"}], ":=", " ", 
+  RowBox[{"PowerMod", "[", 
+   RowBox[{"r", ",", 
+    RowBox[{"-", "1"}], ",", 
+    RowBox[{"EulerPhi", "[", 
+     RowBox[{"p", "*", "q"}], "]"}]}], "]"}]}]}], "Input",
+ CellChangeTimes->{{3.674433714587347*^9, 3.674433725479597*^9}, {
+   3.6744338313097196`*^9, 3.674433886647319*^9}, 3.6744339443654313`*^9, 
+   3.6744401150979147`*^9}],
+
+Cell[CellGroupData[{
+
+Cell["Example", "Subsection",
+ CellChangeTimes->{{3.6744405705615015`*^9, 3.674440572169791*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"r", " ", "=", " ", 
+  RowBox[{"generateR", "[", 
+   RowBox[{"p", ",", "q"}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.674434289986717*^9, 3.674434298103298*^9}, 
+   3.674434373012503*^9}],
+
+Cell[BoxData["1743427"], "Output",
+ CellChangeTimes->{3.6744408288837647`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"s", " ", "=", " ", 
+  RowBox[{"generateS", "[", 
+   RowBox[{"r", ",", "p", ",", "q"}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.6744344256935253`*^9, 3.674434432671035*^9}}],
+
+Cell[BoxData["10579720831075"], "Output",
+ CellChangeTimes->{3.6744408289241467`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"r", " ", "~", " ", "GCD", " ", "~", " ", 
+  RowBox[{"(", 
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{"p", "-", "1"}], ")"}], 
+    RowBox[{"(", 
+     RowBox[{"q", "-", "1"}], ")"}]}], ")"}]}]], "Input",
+ CellChangeTimes->{{3.6744365631112947`*^9, 3.6744365942373953`*^9}, {
+  3.6744367305192146`*^9, 3.674436766600339*^9}, {3.674437063016691*^9, 
+  3.674437066143545*^9}}],
+
+Cell[BoxData["1"], "Output",
+ CellChangeTimes->{3.6744408289416757`*^9}]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Converting Plaintext to Encoded String", "Section",
+ CellChangeTimes->{{3.6744283601113043`*^9, 3.6744283700697966`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"convertStringToCode", "[", "x_", "]"}], ":=", 
+  RowBox[{"ImportString", "[", 
+   RowBox[{"x", ",", 
+    RowBox[{"{", 
+     RowBox[{"\"\<Binary\>\"", ",", "\"\<Byte\>\""}], "}"}]}], "]"}]}], "\n", 
+ RowBox[{
+  RowBox[{"createPaddedString", "[", "x_", "]"}], ":=", 
+  RowBox[{"StringJoin", "[", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"StringPadLeft", "[", 
+      RowBox[{
+       RowBox[{"ToString", "@", "#"}], ",", "3", ",", "\"\<0\>\""}], "]"}], 
+     "&"}], "/@", "x"}], "]"}]}], "\n", 
+ RowBox[{
+  RowBox[{"makeEncodedString", "[", "x_", "]"}], ":=", 
+  RowBox[{"createPaddedString", "[", 
+   RowBox[{"convertStringToCode", "[", "x", "]"}], "]"}]}]}], "Input",
+ CellChangeTimes->{{3.674424281958743*^9, 3.6744242922027006`*^9}, {
+   3.674424333827383*^9, 3.6744244261380467`*^9}, {3.6744272988973885`*^9, 
+   3.6744273841253443`*^9}, 3.674429579936417*^9, {3.6744330749133654`*^9, 
+   3.6744330773088207`*^9}, {3.674433118823708*^9, 3.6744331209740353`*^9}, {
+   3.674435249741481*^9, 3.6744352520872097`*^9}, {3.6744381128260517`*^9, 
+   3.6744381130510893`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["Example", "Subsection",
+ CellChangeTimes->{{3.6744293015110817`*^9, 3.674429302482052*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"message", "=", " ", "\"\<Cool\>\""}], ";"}]], "Input",
+ CellChangeTimes->{{3.6744291159355392`*^9, 3.674429168631198*^9}, {
+   3.674429433597476*^9, 3.674429450038093*^9}, 3.6744331229095016`*^9, {
+   3.674436444312539*^9, 3.6744364457749386`*^9}, {3.6744370898556595`*^9, 
+   3.674437091519128*^9}, {3.6744371799268837`*^9, 3.674437199187771*^9}, {
+   3.674437451979703*^9, 3.674437487324369*^9}, 3.674437527511315*^9, 
+   3.6744375896347756`*^9, {3.674437751693706*^9, 3.674437778442093*^9}, {
+   3.674439770742798*^9, 3.6744397716945133`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"makeEncodedString", "[", "message", "]"}]], "Input",
+ CellChangeTimes->{{3.674425657326224*^9, 3.674425658264695*^9}, {
+   3.674425691004182*^9, 3.6744256934590015`*^9}, {3.6744291573049097`*^9, 
+   3.6744291752072015`*^9}, {3.6744292436268005`*^9, 3.674429254798133*^9}, {
+   3.6744293270127296`*^9, 3.6744293346401277`*^9}, {3.674429444919531*^9, 
+   3.6744294451310577`*^9}, 3.6744380840521383`*^9}],
+
+Cell[BoxData["\<\"067111111108\"\>"], "Output",
+ CellChangeTimes->{{3.674425659201082*^9, 3.6744256686714325`*^9}, 
+   3.6744257064202833`*^9, {3.674429161378768*^9, 3.674429190775719*^9}, 
+   3.6744292557797737`*^9, 3.6744293350862846`*^9, {3.6744294378031654`*^9, 
+   3.6744294530335503`*^9}, 3.6744332996527653`*^9, 3.674435255243489*^9, 
+   3.6744357002696667`*^9, 3.674435847223759*^9, 3.674435984058606*^9, 
+   3.674436265070703*^9, 3.6744364477453423`*^9, 3.6744370934937115`*^9, {
+   3.6744371823144293`*^9, 3.674437204247615*^9}, {3.67443744007331*^9, 
+   3.674437489827571*^9}, 3.674437530114462*^9, {3.6744375717881064`*^9, 
+   3.674437592062318*^9}, {3.6744376369256697`*^9, 3.6744376545185966`*^9}, 
+   3.674437690642797*^9, {3.674437735926609*^9, 3.674437782971523*^9}, 
+   3.6744380863821726`*^9, 3.674439777468485*^9, 3.674440829008756*^9}]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Converting encoded string into ciphertext", "Section",
+ CellChangeTimes->{{3.674429393781021*^9, 3.6744294086620584`*^9}, {
+  3.674430183260279*^9, 3.674430185716078*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"encryptString", "[", 
+   RowBox[{"encodedPlainText_", ",", "r_", ",", " ", "n_"}], "]"}], ":=", " ", 
+  RowBox[{
+   SuperscriptBox["encodedPlainText", "r"], " ", "~", " ", "Mod", " ", "~", 
+   " ", "n"}]}]], "Input",
+ CellChangeTimes->{{3.6744275362503815`*^9, 3.674427649527619*^9}, {
+   3.6744276824151425`*^9, 3.674427704984906*^9}, {3.674427797065981*^9, 
+   3.6744278435032883`*^9}, {3.674427962953888*^9, 3.674428065710081*^9}, {
+   3.6744299426285257`*^9, 3.67442996752822*^9}, {3.674433083854776*^9, 
+   3.674433085328744*^9}, {3.6744331477884274`*^9, 3.6744331630696306`*^9}, {
+   3.6744345870212145`*^9, 3.6744346561368732`*^9}, 3.67443964424871*^9}],
+
+Cell[CellGroupData[{
+
+Cell["Example", "Subsection",
+ CellChangeTimes->{{3.6744295503508124`*^9, 3.674429551520091*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"encryptedMessage", " ", "=", " ", 
+  RowBox[{"encryptString", "[", 
+   RowBox[{
+    RowBox[{"ToExpression", "@", 
+     RowBox[{"makeEncodedString", "[", "message", "]"}]}], ",", "r", ",", 
+    "n"}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.6744360553449306`*^9, 3.674436071458881*^9}, 
+   3.6744361338173532`*^9, 3.6744381528537054`*^9, 3.6744398101386266`*^9}],
+
+Cell[BoxData["14818926214185"], "Output",
+ CellChangeTimes->{
+  3.6744361344532537`*^9, 3.6744362699383326`*^9, 3.6744364546098633`*^9, 
+   3.6744367848780923`*^9, {3.6744370142281723`*^9, 3.6744370328584113`*^9}, 
+   3.6744370997236013`*^9, {3.6744371589151993`*^9, 3.6744372073797755`*^9}, {
+   3.6744374435254545`*^9, 3.674437533630086*^9}, {3.6744375776966505`*^9, 
+   3.674437594944172*^9}, {3.674437644615676*^9, 3.674437657219842*^9}, 
+   3.6744376946738615`*^9, {3.6744377438898864`*^9, 3.6744377885148067`*^9}, {
+   3.674439802684309*^9, 3.6744398132933693`*^9}, 3.674440829505129*^9}]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Converting ciphertext to encoded text", "Section",
+ CellChangeTimes->{{3.674430169276453*^9, 3.6744301780124655`*^9}, {
+  3.674430289996073*^9, 3.6744302947029715`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"decryptString", "[", 
+   RowBox[{"ciphertext_", ",", "pKey_", ",", " ", "n_"}], "]"}], ":=", 
+  RowBox[{"PowerMod", " ", "[", 
+   RowBox[{"ciphertext", ",", "pKey", ",", " ", "n"}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.674428050252322*^9, 3.6744280918224277`*^9}, {
+   3.6744281269816694`*^9, 3.6744281524982305`*^9}, {3.6744303340193253`*^9, 
+   3.674430339660903*^9}, {3.674430372204651*^9, 3.674430384644098*^9}, 
+   3.674430521206905*^9, {3.6744308908289003`*^9, 3.6744309287147045`*^9}, {
+   3.674430977272034*^9, 3.674430979745826*^9}, 3.6744315110523677`*^9, {
+   3.674431585399867*^9, 3.674431602099557*^9}, {3.6744353494302673`*^9, 
+   3.67443537730752*^9}, 3.674435925683981*^9, {3.6744373385429144`*^9, 
+   3.6744373722131205`*^9}, 3.6744395745176783`*^9}],
+
+Cell[CellGroupData[{
+
+Cell["Example", "Subsection",
+ CellChangeTimes->{{3.6744399084723606`*^9, 3.67443990938923*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"decryptedString", " ", "=", " ", 
+  RowBox[{"ToString", "[", 
+   RowBox[{"decryptString", "[", 
+    RowBox[{"encryptedMessage", ",", "s", ",", "n"}], "]"}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.6744296932016335`*^9, 3.6744297067220364`*^9}, {
+   3.6744297530294065`*^9, 3.674429796963827*^9}, {3.674429906030509*^9, 
+   3.674429911262624*^9}, {3.674430105158162*^9, 3.6744301088637376`*^9}, {
+   3.6744308184733453`*^9, 3.6744308476150937`*^9}, {3.674430909077694*^9, 
+   3.67443090957415*^9}, {3.6744316112835555`*^9, 3.6744316176480207`*^9}, {
+   3.67443539819198*^9, 3.6744353990278664`*^9}, {3.674435454512268*^9, 
+   3.6744354793870745`*^9}, {3.6744355248917975`*^9, 3.674435529025357*^9}, 
+   3.6744355788512793`*^9, {3.6744356099405546`*^9, 3.6744356438467674`*^9}, {
+   3.6744360197731295`*^9, 3.674436047239012*^9}, {3.6744361411395874`*^9, 
+   3.6744361451790266`*^9}, 3.674437839670349*^9, {3.6744379384013805`*^9, 
+   3.674437942911834*^9}}],
+
+Cell[BoxData["\<\"67111111108\"\>"], "Output",
+ CellChangeTimes->{
+  3.6744361477125254`*^9, {3.6744362734086704`*^9, 3.6744362821439743`*^9}, 
+   3.6744364569952106`*^9, 3.674436786735809*^9, {3.674437028256643*^9, 
+   3.6744370358054743`*^9}, 3.6744371035155373`*^9, {3.6744371714980907`*^9, 
+   3.6744372172487335`*^9}, {3.6744373774656715`*^9, 3.674437379778632*^9}, {
+   3.674437432647084*^9, 3.6744375357046595`*^9}, {3.6744375812735567`*^9, 
+   3.674437597466446*^9}, {3.6744376481864924`*^9, 3.67443765803557*^9}, 
+   3.674437698219718*^9, {3.6744377469920864`*^9, 3.67443778944796*^9}, 
+   3.6744378407509966`*^9, 3.674437901147223*^9, 3.6744379433662663`*^9, 
+   3.6744391745131083`*^9, 3.674439816810211*^9, 3.6744408295803037`*^9}]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Converting encoded text back to plaintext", "Section",
+ CellChangeTimes->{{3.6744310118380804`*^9, 3.674431018559446*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"partitionThatString", "[", "x_", "]"}], ":=", 
+  RowBox[{"StringPartition", "[", 
+   RowBox[{"x", ",", "3"}], "]"}]}], "\n", 
+ RowBox[{
+  RowBox[{"convertPaddedStringToString", "[", "x_", "]"}], ":=", 
+  RowBox[{"FromCharacterCode", "[", "x", "]"}]}], "\n", 
+ RowBox[{"fixPadBillStyle", ":=", " ", 
+  RowBox[{
+   RowBox[{"If", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       RowBox[{"StringLength", " ", "[", " ", "#", " ", "]"}], " ", "~", " ", 
+       "Mod", " ", "~", " ", "3"}], " ", "\[Equal]", " ", "0"}], ",", " ", 
+     "#", ",", " ", 
+     RowBox[{"StringPadLeft", "[", " ", 
+      RowBox[{"#", ",", 
+       RowBox[{"3", "*", 
+        RowBox[{"Ceiling", "[", 
+         FractionBox[
+          RowBox[{"(", 
+           RowBox[{"StringLength", " ", "@", " ", "#"}], ")"}], "3"], "]"}]}],
+        ",", "\"\<0\>\""}], "]"}]}], "]"}], "&"}]}]}], "Input",
+ CellChangeTimes->{
+  3.6744311651295853`*^9, {3.6744380164388895`*^9, 3.674438036146248*^9}, 
+   3.674439921349928*^9}],
+
+Cell[CellGroupData[{
+
+Cell["Example", "Subsection",
+ CellChangeTimes->{{3.674431182648204*^9, 3.6744311833898087`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"list", " ", "=", " ", 
+  RowBox[{"partitionThatString", "[", 
+   RowBox[{"fixPadBillStyle", "[", 
+    RowBox[{"ToString", "[", "decryptedString", "]"}], "]"}], 
+   "]"}]}]], "Input",
+ CellChangeTimes->{{3.6744390680722466`*^9, 3.6744391533256087`*^9}, {
+  3.6744392158209877`*^9, 3.674439240154936*^9}, {3.6744394320452695`*^9, 
+  3.674439433442853*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"\<\"067\"\>", ",", "\<\"111\"\>", ",", "\<\"111\"\>", 
+   ",", "\<\"108\"\>"}], "}"}]], "Output",
+ CellChangeTimes->{3.6744392404503098`*^9, 3.674439403697086*^9, 
+  3.6744394353270674`*^9, 3.6744398315510464`*^9, 3.6744408296574516`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"FromCharacterCode", "[", 
+  RowBox[{"ToExpression", "@", "list"}], "]"}]], "Input",
+ CellChangeTimes->{{3.674439420094946*^9, 3.6744394377482605`*^9}, {
+  3.6744394690388374`*^9, 3.6744394721007643`*^9}}],
+
+Cell[BoxData["\<\"Cool\"\>"], "Output",
+ CellChangeTimes->{3.674439438129835*^9, 3.6744394728375044`*^9, 
+  3.674439832574707*^9, 3.6744408296754694`*^9}]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{1142, 969},
+WindowMargins->{{Automatic, 6}, {-25, Automatic}},
+FrontEndVersion->"10.4 for Microsoft Windows (64-bit) (February 25, 2016)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 108, 1, 101, "Title"],
+Cell[691, 25, 122, 1, 29, "Item"],
+Cell[CellGroupData[{
+Cell[838, 30, 130, 1, 70, "Section"],
+Cell[971, 33, 283, 5, 21, "ItemParagraph"],
+Cell[CellGroupData[{
+Cell[1279, 42, 1107, 21, 72, "Input"],
+Cell[2389, 65, 78, 1, 31, "Output"],
+Cell[2470, 68, 78, 1, 31, "Output"],
+Cell[2551, 71, 83, 1, 31, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[2671, 77, 332, 6, 21, "ItemParagraph"],
+Cell[3006, 85, 411, 6, 21, "SubitemParagraph"],
+Cell[3420, 93, 381, 6, 21, "ItemParagraph"],
+Cell[3804, 101, 426, 6, 21, "ItemParagraph"]
+}, Open  ]],
+Cell[4245, 110, 1274, 37, 72, "Input"],
+Cell[CellGroupData[{
+Cell[5544, 151, 97, 1, 49, "Subsection"],
+Cell[CellGroupData[{
+Cell[5666, 156, 211, 5, 31, "Input"],
+Cell[5880, 163, 78, 1, 31, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[5995, 169, 197, 4, 31, "Input"],
+Cell[6195, 175, 85, 1, 31, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[6317, 181, 395, 10, 31, "Input"],
+Cell[6715, 193, 72, 1, 31, "Output"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[6848, 201, 127, 1, 70, "Section"],
+Cell[6978, 204, 1103, 25, 72, "Input"],
+Cell[CellGroupData[{
+Cell[8106, 233, 97, 1, 49, "Subsection"],
+Cell[8206, 236, 581, 9, 31, "Input"],
+Cell[CellGroupData[{
+Cell[8812, 249, 426, 6, 31, "Input"],
+Cell[9241, 257, 856, 11, 31, "Output"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[10158, 275, 177, 2, 70, "Section"],
+Cell[10338, 279, 695, 12, 31, "Input"],
+Cell[CellGroupData[{
+Cell[11058, 295, 97, 1, 49, "Subsection"],
+Cell[CellGroupData[{
+Cell[11180, 300, 386, 8, 31, "Input"],
+Cell[11569, 310, 594, 8, 31, "Output"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[12224, 325, 175, 2, 70, "Section"],
+Cell[12402, 329, 806, 13, 31, "Input"],
+Cell[CellGroupData[{
+Cell[13233, 346, 96, 1, 49, "Subsection"],
+Cell[CellGroupData[{
+Cell[13354, 351, 981, 15, 31, "Input"],
+Cell[14338, 368, 743, 10, 31, "Output"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[15142, 385, 128, 1, 70, "Section"],
+Cell[15273, 388, 1021, 27, 87, "Input"],
+Cell[CellGroupData[{
+Cell[16319, 419, 97, 1, 49, "Subsection"],
+Cell[CellGroupData[{
+Cell[16441, 424, 378, 8, 31, "Input"],
+Cell[16822, 434, 278, 5, 31, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[17137, 444, 228, 4, 31, "Input"],
+Cell[17368, 450, 154, 2, 31, "Output"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
