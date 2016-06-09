@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[      9355,        318]
-NotebookOptionsPosition[      7867,        261]
-NotebookOutlinePosition[      8243,        277]
-CellTagsIndexPosition[      8200,        274]
+NotebookDataLength[      9541,        321]
+NotebookOptionsPosition[      8016,        263]
+NotebookOutlinePosition[      8392,        279]
+CellTagsIndexPosition[      8349,        276]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -85,17 +85,15 @@ Cell[BoxData[{
 Cell[BoxData[{
  RowBox[{
   RowBox[{"encryptMessage", "[", "message_", "]"}], ":=", 
-  RowBox[{"Mod", "[", 
-   RowBox[{
-    SuperscriptBox["message", "e"], ",", "n"}], 
-   "]"}]}], "\[IndentingNewLine]", 
+  RowBox[{"PowerMod", "[", 
+   RowBox[{"message", ",", "e", ",", "n"}], "]"}]}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{"decryptMessage", "[", "message_", "]"}], ":=", 
-  RowBox[{"Mod", "[", 
-   RowBox[{
-    SuperscriptBox["message", "d"], ",", "n"}], "]"}]}]}], "Code",
+  RowBox[{"PowerMod", "[", 
+   RowBox[{"message", ",", "d", ",", "n"}], "]"}]}]}], "Code",
  CellChangeTimes->{{3.6744347893252497`*^9, 3.6744349824721613`*^9}, {
-  3.6744353033419085`*^9, 3.6744353639132032`*^9}}],
+  3.6744353033419085`*^9, 3.6744353639132032`*^9}, {3.6744374788005004`*^9, 
+  3.67443751834391*^9}}],
 
 Cell[CellGroupData[{
 
@@ -121,7 +119,8 @@ Cell[BoxData[
  CellChangeTimes->{{3.674435526678979*^9, 3.6744355564062815`*^9}}],
 
 Cell[BoxData["\<\"Hi\"\>"], "Output",
- CellChangeTimes->{3.6744355708919706`*^9}]
+ CellChangeTimes->{
+  3.6744355708919706`*^9, {3.674437511672929*^9, 3.6744375220701947`*^9}}]
 }, Open  ]]
 }, Open  ]],
 
@@ -254,9 +253,12 @@ Cell[BoxData[
 Cell[BoxData["\<\"Hi David\"\>"], "Output",
  CellChangeTimes->{3.674428018042863*^9, 3.6744338893746076`*^9, 
   3.6744344236653438`*^9, 3.6744355074601555`*^9}]
+}, Open  ]],
+
+Cell[BoxData[" "], "Input",
+ CellChangeTimes->{3.6744373055887303`*^9}]
 }, Open  ]]
 }, Open  ]]
-}, Closed]]
 }, Open  ]]
 },
 WindowSize->{958, 1028},
@@ -283,42 +285,43 @@ Cell[700, 27, 107, 1, 69, "Section"],
 Cell[810, 30, 152, 3, 32, "Text"],
 Cell[965, 35, 551, 15, 32, "Input"],
 Cell[1519, 52, 935, 30, 113, "Input"],
-Cell[2457, 84, 497, 13, 79, "Code"],
+Cell[2457, 84, 521, 11, 76, "Code"],
 Cell[CellGroupData[{
-Cell[2979, 101, 168, 3, 32, "Input"],
-Cell[3150, 106, 101, 1, 33, "Output"]
+Cell[3003, 99, 168, 3, 32, "Input"],
+Cell[3174, 104, 101, 1, 33, "Output"]
 }, Open  ]],
-Cell[3266, 110, 92, 1, 32, "Input"],
+Cell[3290, 108, 92, 1, 32, "Input"],
 Cell[CellGroupData[{
-Cell[3383, 115, 238, 5, 32, "Input"],
-Cell[3624, 122, 81, 1, 33, "Output"]
+Cell[3407, 113, 238, 5, 32, "Input"],
+Cell[3648, 120, 132, 2, 66, "Output"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[3754, 129, 93, 1, 69, "Section"],
-Cell[3850, 132, 242, 5, 32, "Text"],
+Cell[3829, 128, 93, 1, 69, "Section"],
+Cell[3925, 131, 242, 5, 32, "Text"],
 Cell[CellGroupData[{
-Cell[4117, 141, 96, 1, 47, "Subsection"],
-Cell[4216, 144, 1662, 48, 133, "Code"]
+Cell[4192, 140, 96, 1, 47, "Subsection"],
+Cell[4291, 143, 1662, 48, 133, "Code"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[5915, 197, 102, 1, 47, "Subsection"],
+Cell[5990, 196, 102, 1, 47, "Subsection"],
 Cell[CellGroupData[{
-Cell[6042, 202, 482, 10, 32, "Input"],
-Cell[6527, 214, 172, 2, 70, "Output"]
+Cell[6117, 201, 482, 10, 32, "Input"],
+Cell[6602, 213, 172, 2, 33, "Output"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[6748, 222, 151, 2, 47, "Subsection"],
-Cell[6902, 226, 169, 3, 32, "Text"],
-Cell[7074, 231, 155, 5, 32, "Input"],
-Cell[7232, 238, 224, 6, 32, "Input"],
+Cell[6823, 221, 151, 2, 47, "Subsection"],
+Cell[6977, 225, 169, 3, 32, "Text"],
+Cell[7149, 230, 155, 5, 32, "Input"],
+Cell[7307, 237, 224, 6, 32, "Input"],
 Cell[CellGroupData[{
-Cell[7481, 248, 171, 3, 32, "Input"],
-Cell[7655, 253, 160, 2, 70, "Output"]
+Cell[7556, 247, 171, 3, 32, "Input"],
+Cell[7730, 252, 160, 2, 33, "Output"]
+}, Open  ]],
+Cell[7905, 257, 71, 1, 32, "Input"]
 }, Open  ]]
 }, Open  ]]
-}, Closed]]
 }, Open  ]]
 }
 ]
